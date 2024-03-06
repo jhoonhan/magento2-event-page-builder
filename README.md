@@ -31,6 +31,8 @@ Working...
   title, speaker description, and speaker image.
 - `hanstudio-eventpagebuilder-schspk` - This table stores relationships between schedule and speaker.
 
+![Database Diagram](https://github.com/jhoonhan/magento2-event-page-builder/blob/master/docs/database-structure.png?raw=true)
+
 2. The module creates a new admin grid in the Magento 2 admin panel under the Content > Event Page Builder. The admin
    grid is used to manage the event, schedule, and speaker information. The master admin can authorize access to other
    users
@@ -50,3 +52,4 @@ https://testsite.dev/rest/V1/data/1
 
 5. Currently, in version 1, it only creates a CMS Block for an event programme. In the future version, it will create a
    CMS Page for other information such as event speakers, event location, and event sponsors.
+
