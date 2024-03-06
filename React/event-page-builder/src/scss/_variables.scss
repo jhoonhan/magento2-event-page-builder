@@ -1,0 +1,36 @@
+:root {
+  --em: 1rem;
+  --em--fl: clamp(0.625rem, min(0.521vw, 0.251vh), 1rem);
+
+  --d--xs--fl: calc(var(--em--fl) * 0.5); // 5 - 8px
+  --d--s--fl: calc(var(--em--fl) * 1); // 10 - 16px
+  --d--d--fl: calc(var(--em--fl) * 1.5); // 15 - 24px
+  --d--m--fl: calc(var(--em--fl) * 2); // 20 - 32px
+  --d--l--fl: calc(var(--em--fl) * 2.5); // 25 - 40px
+
+  --c--blue: #0071ad;
+  --c--blue--light: #00baee;
+  --c--blue--dark: #006092;
+
+  --c--white: #fff;
+  --c--white--dark: #f8f8f8;
+  --c--white--overlay: rgba(255, 255, 255, 0.9);
+
+
+  --c--grey: #ccc;
+  --c--grey--dark: #6f7176;
+  --c--black: #181818;
+  --c--black--overlay: rgba(0, 0, 0, 0.9);
+
+  --c--blue--brand: #0071ad;
+  --c--blue--light: #00baee;
+
+  --f-f--d: Lato, sans-serif;
+  --f-f--2: "Rajdhani", sans-serif;
+
+  --f-w--d: 400;
+  --f-w--semi-bold: 600;
+  --f-w--bold: 900;
+
+  --transition--d: all 0.3s ease-in-out;
+}

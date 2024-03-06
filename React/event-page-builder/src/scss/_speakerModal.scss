@@ -1,0 +1,59 @@
+#hanstudio-event-page-builder {
+
+
+  & .speaker-modal {
+    display: flex;
+
+    padding: calc(var(--em) * 6.4) calc(var(--em) * 3.2);
+
+    background-color: var(--c--white--overlay);
+
+    & * {
+      //color: var(--c--white);
+    }
+
+    h2.speaker-modal__name {
+      font-size: calc(var(--em) * 3.2);
+      //font-family: var(--f-f--2);
+      font-weight: var(--f-w--bold);
+    }
+
+    & .speaker-modal__image {
+      width: 100%;
+      min-width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 1000px;
+      background-image: url("../assets/images/avatar.jpg");
+      background-size: cover;
+    }
+
+    & .speaker-modal__description {
+    }
+  }
+
+  & .speaker__image {
+    max-width: 45vh;
+    max-height: 45vh;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-self: center;
+    background-size: cover;
+
+    & img {
+      width: 100%;
+
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+
+      border-radius: 1000px;
+      border: 3px solid var(--c--white);
+
+      overflow: hidden;
+
+    }
+  }
+}
+
+
+
+

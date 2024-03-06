@@ -1,0 +1,31 @@
+define([
+    'uiComponent',
+    'ko',
+    'mage/storage',
+    'jquery',
+    'mage/translate',
+], function (
+    Component,
+    ko,
+    storage,
+    $,
+    $t,
+) {
+    'use strict';
+
+    return Component.extend({
+        defaults: {
+            placeholder: $t('Example: %1').replace('%1', '24-MB01'),
+            messageResponse: ko.observable(''),
+            speakers: []
+        },
+        initialize(config) {
+            this._super();
+            this.speakers = config.speakers;
+            console.log(this.speakers);
+        },
+        handleSubmit() {
+            console.log('Submit aaang');
+        }
+    });
+});

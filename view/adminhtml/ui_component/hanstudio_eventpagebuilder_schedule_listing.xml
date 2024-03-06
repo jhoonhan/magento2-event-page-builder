@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                hanstudio_eventpagebuilder_schedule_listing.hanstudio_eventpagebuilder_schedule_listing_data_source
+            </item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="addSchedule" xsi:type="string">
+                HanStudio\EventPageBuilder\Block\Adminhtml\Schedule\New\Button\AddSchedule
+            </item>
+        </item>
+    </argument>
+    <settings>
+        <deps>
+            <dep>
+                hanstudio_eventpagebuilder_schedule_listing.hanstudio_eventpagebuilder_schedule_listing_data_source
+            </dep>
+        </deps>
+        <spinner>hanstudio_eventpagebuilder_schedule_columns</spinner>
+    </settings>
+    <dataSource name="hanstudio_eventpagebuilder_schedule_listing_data_source"
+                component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">schedule_id</param>
+            </storageConfig>
+        </settings>
+        <aclResource>HanStudio_EventPageBuilder::schedule</aclResource>
+        <dataProvider name="hanstudio_eventpagebuilder_schedule_listing_data_source"
+                      class="HanStudio\EventPageBuilder\Ui\DataProvider\ScheduleList">
+            <settings>
+                <requestFieldName>event_id</requestFieldName>
+                <primaryFieldName>schedule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>false</sticky>
+        </settings>
+        <paging name="listing_paging"/>
+        <columnsControls name="columns_controls"/>
+        <bookmark name="bookmarks"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateTime</item>
+                    <item name="label" xsi:type="string" translate="true">Date</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                </item>
+            </argument>
+        </filters>
+        <filterSearch name="fulltext"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <settings>
+                <selectProvider>
+                    hanstudio_eventpagebuilder_schedule_listing.hanstudio_eventpagebuilder_schedule_listing.hanstudio_eventpagebuilder_schedule_columns.ids
+                </selectProvider>
+                <indexField>schedule_id</indexField>
+            </settings>
+            <!-- S009-3: By providing a custom class to "action" node, it can inject eventId to massDelete action-->
+            <action name="delete"
+                    class="HanStudio\EventPageBuilder\Ui\Component\Listing\Column\InjectEventId">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="urlPath" xsi:type="string">*/schedule/massDelete</item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to delete the
+                                selected items?
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <columns name="hanstudio_eventpagebuilder_schedule_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">
+                        hanstudio_eventpagebuilder_schedule_listing.hanstudio_eventpagebuilder_schedule_listing.hanstudio_eventpagebuilder_schedule_columns_editor
+                    </item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="*/schedule/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="selectProvider" xsi:type="string">
+                    hanstudio_eventpagebuilder_schedule_listing.hanstudio_eventpagebuilder_schedule_listing.hanstudio_eventpagebuilder_schedule_columns.ids
+                </param>
+                <param name="indexField" xsi:type="string">schedule_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+            </editorConfig>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>schedule_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="name">
+            <settings>
+                <label translate="true">Name</label>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="schedule_date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <label translate="true">Date</label>
+                <filter>dateRange</filter>
+                <dateFormat>MMM d, YYYY</dateFormat>
+                <!--                <options class="HanStudio\EventPageBuilder\Model\Config\Source\TimezoneTime"/>-->
+                <editor>
+                    <editorType>date</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="starts_at">
+            <settings>
+                <label translate="true">Starts at</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="ends_at">
+            <settings>
+                <label translate="true">Ends at</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="description">
+            <settings>
+                <label translate="true">description</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <!--        <column name="is_split" component="Magento_Ui/js/grid/columns/select">-->
+        <!--            <settings>-->
+        <!--                <label translate="true">Is Split Session</label>-->
+        <!--                <options class="Magento\Config\Model\Config\Source\Yesno"/>-->
+        <!--                <dataType>select</dataType>-->
+        <!--                <sorting>desc</sorting>-->
+        <!--                <filter>select</filter>-->
+        <!--                <editor>-->
+        <!--                    <editorType>select</editorType>-->
+        <!--                    <validation>-->
+        <!--                        <rule name="required-entry" xsi:type="boolean">true</rule>-->
+        <!--                    </validation>-->
+        <!--                </editor>-->
+        <!--            </settings>-->
+        <!--        </column>-->
+        <column name="is_published" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <label translate="true">Is Published</label>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <dataType>select</dataType>
+                <sorting>desc</sorting>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions"
+                       class="HanStudio\EventPageBuilder\Ui\Component\Listing\Column\ScheduleActions"/>
+    </columns>
+</listing>

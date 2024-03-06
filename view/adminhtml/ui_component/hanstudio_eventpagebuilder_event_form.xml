@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                hanstudio_eventpagebuilder_event_form.hanstudio_eventpagebuilder_event_data_source
+            </item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="HanStudio\EventPageBuilder\Block\Adminhtml\Event\Edit\Button\Back"/>
+            <button name="save" class="HanStudio\EventPageBuilder\Block\Adminhtml\Event\Edit\Button\Save"/>
+        </buttons>
+        <namespace>hanstudio_eventpagebuilder_event_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>hanstudio_eventpagebuilder_event_form.hanstudio_eventpagebuilder_event_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="hanstudio_eventpagebuilder_event_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="HanStudio\EventPageBuilder\Ui\DataProvider\Event"
+                      name="hanstudio_eventpagebuilder_event_data_source">
+            <settings>
+                <!--                This determines if the url/id is matched with db/event_id
+                 FE uses these value to grab the column in db   -->
+                <requestFieldName>event_id</requestFieldName>
+                <primaryFieldName>event_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="hanstudio_eventpagebuilder_event_fieldset">
+        <settings>
+            <label/>
+        </settings>
+        <field name="event_id" formElement="hidden"/>
+        <field name="name" formElement="input">
+            <settings>
+                <label translate="true">Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="url" formElement="input">
+            <settings>
+                <label translate="true">Url</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="no-marginal-whitespace" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="event_start_date" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Start Date</item>
+                    <item name="source" xsi:type="string">vendor</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="showsTime" xsi:type="boolean">false</item>
+                        <item name="minDate" xsi:type="string">new Date()</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="timezone" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">4</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Timezone</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="HanStudio\EventPageBuilder\Model\Config\Source\UsaTimezone"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="description" formElement="textarea">
+            <settings>
+                <label translate="true">Description</label>
+                <placeholder>
+                    A brief description of the event
+                </placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <textarea>
+                    <settings>
+                        <rows>6</rows>
+                    </settings>
+                </textarea>
+            </formElements>
+        </field>
+        <field name="is_published" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Is Published?</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

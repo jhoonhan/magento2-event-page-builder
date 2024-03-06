@@ -1,0 +1,97 @@
+<?php declare(strict_types=1);
+
+namespace HanStudio\EventPageBuilder\Test\Unit\Controller\Adminhtml\Event;
+
+use PHPUnit\Framework\TestCase;
+
+use Magento\Backend\App\Action\Context;
+use HanStudio\EventPageBuilder\Controller\Adminhtml\Event\Save;
+
+use HanStudio\EventPageBuilder\Model\EventFactory;
+use HanStudio\EventPageBuilder\Model\ResourceModel\Event as EventResource;
+use HanStudio\EventPageBuilder\Model\ResourceModel\Schedule\CollectionFactory as ScheduleCollectionFactory;
+use HanStudio\EventPageBuilder\Controller\Adminhtml\BlockActions;
+use HanStudio\EventPageBuilder\Model\Config\Source\DateTimeFormat;
+
+
+class SaveTest extends TestCase
+{
+    /**
+     * @var Save
+     */
+    private $controller;
+
+    /**
+     * @var Context
+     */
+    private $contextMock;
+
+    /**
+     * @var EventFactory
+     */
+    private $eventFactoryMock;
+
+    /**
+     * @var EventResource
+     */
+    private $eventResourceMock;
+
+    /**
+     * @var ScheduleCollectionFactory
+     */
+    private $scheduleCollectionFactoryMock;
+
+    /**
+     * @var BlockActions
+     */
+    private $blockActionsMock;
+
+    /**
+     * @var DateTimeFormat
+     */
+    private $dateTimeFormatMock;
+
+    protected function setUp(): void
+    {
+        $this->contextMock = $this
+            ->getMockBuilder(Context::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->eventFactoryMock = $this
+            ->getMockBuilder(EventFactory::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->eventResourceMock = $this
+            ->getMockBuilder(EventResource::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $this->scheduleCollectionFactoryMock = $this
+            ->getMockBuilder(ScheduleCollectionFactory::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->blockActionsMock = $this
+            ->getMockBuilder(BlockActions::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->dateTimeFormatMock = $this
+            ->getMockBuilder(DateTimeFormat::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->controller = new Save(
+            $this->contextMock,
+            $this->eventFactoryMock,
+            $this->eventResourceMock,
+            $this->scheduleCollectionFactoryMock,
+            $this->blockActionsMock,
+            $this->dateTimeFormatMock
+        );
+    }
+
+    public function testExecute()
+    {
+
+        $this->assertTrue(true);
+    }
+
+}

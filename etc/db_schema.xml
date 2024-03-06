@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="hanstudio_eventpagebuilder_event" engine="innodb" comment="Events">
+        <column name="event_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Event Id"/>
+        <column name="name" xsi:type="text" nullable="false" comment="name"/>
+        <column name="url" xsi:type="text" nullable="false" comment="url"/>
+        <column name="event_start_date" xsi:type="datetime" default="CURRENT_TIMESTAMP" nullable="false"
+                comment="Event start date"/>
+        <column name="timezone" xsi:type="text" nullable="false" comment="event timezone"/>
+        <column name="description" xsi:type="text" nullable="true" comment="event description"/>
+        <column name="is_published" xsi:type="boolean" nullable="false" default="false" comment="Is published"/>
+        <column name="created_at" xsi:type="datetime" nullable="false" default="CURRENT_TIMESTAMP" on_update="false"
+                comment="Created at"/>
+        <column name="updated_at" xsi:type="datetime" nullable="false" default="CURRENT_TIMESTAMP" on_update="true"
+                comment="Updated at"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="event_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="HAYWARD_SCHEDULEPAGEBUILDER_EVENT_URL_UNIQUE">
+            <column name="url"/>
+        </constraint>
+        <index referenceId="HAYWARD_SCHEDULEPAGEBUILDER_EVENT_NAME" indexType="fulltext">
+            <column name="name"/>
+        </index>
+    </table>
+
+    <table name="hanstudio_eventpagebuilder_schedule" engine="innodb" comment="Schedules">
+        <column name="schedule_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Schedule Id"/>
+        <column name="event_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Event Id"/>
+        <column name="name" xsi:type="text" nullable="false" comment="name"/>
+        <column name="schedule_date" xsi:type="datetime" nullable="true"
+                comment="Schedule date"/>
+        <column name="starts_at" xsi:type="text" nullable="true" comment="Starts at"/>
+        <column name="ends_at" xsi:type="text" nullable="true" comment="Ends at"/>
+        <!--        <column name="speakers" xsi:type="json" nullable="true" comment="Speakers"/>-->
+        <column name="description" xsi:type="text" nullable="false" comment="description"/>
+        <column name="is_published" xsi:type="boolean" nullable="false" default="false" comment="Is Published"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="schedule_id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="SPB_SCHSPK_EVENT_ID_SCHEDULEPAGEBUILDER_EVENT_EVENT_ID"
+                    table="hanstudio_eventpagebuilder_schedule"
+                    column="event_id"
+                    referenceTable="hanstudio_eventpagebuilder_event"
+                    referenceColumn="event_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="HAYWARD_SCHEDULEPAGEBUILDER_SCHEDULE_NAME" indexType="fulltext">
+            <column name="name"/>
+        </index>
+    </table>
+
+    <table name="hanstudio_eventpagebuilder_speaker" engine="innodb" comment="Speakers">
+        <column name="speaker_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Speaker Id"/>
+        <column name="event_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Event Id"/>
+        <column name="firstname" xsi:type="text" nullable="false" comment="firstname"/>
+        <column name="lastname" xsi:type="text" nullable="false" comment="lastname"/>
+        <column name="title" xsi:type="text" nullable="true" comment="title"/>
+        <column name="company" xsi:type="text" nullable="true" comment="company"/>
+        <column name="description" xsi:type="text" nullable="true" comment="description"/>
+        <column name="image" xsi:type="json" nullable="true" comment="image"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="speaker_id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="SPB_SPEAKER_EVT_ID_SCHEDULEPAGEBUILDER_EVENT_EVENT_ID"
+                    table="hanstudio_eventpagebuilder_speaker"
+                    column="event_id"
+                    referenceTable="hanstudio_eventpagebuilder_event"
+                    referenceColumn="event_id"
+                    onDelete="CASCADE"/>
+
+        <index referenceId="HAYWARD_SCHEDULEPAGEBUILDER_SPEAKER_NAME" indexType="fulltext">
+            <column name="lastname"/>
+        </index>
+    </table>
+
+    <!--
+        This talbe is to use when you want to go RDBM for Schedule/Speaker realtion.
+        However, since the speakers are stored in JSON format in the schedule table, this table is not used.
+        I decided not to use RDBM because the non-complexity of the relationship between two entities.
+        Also, establishing N-to-N relationship in Magento is not an easy task.
+
+    -->
+    <table name="hanstudio_eventpagebuilder_schspk" resource="default" engine="innodb"
+           comment="Schedule to Speaker relation">
+        <column xsi:type="int"
+                name="event_id"
+                unsigned="true"
+                nullable="false"
+                identity="false"
+                comment="Event Id"/>
+        <column xsi:type="int"
+                name="schedule_id"
+                unsigned="true"
+                nullable="false"
+                identity="false"
+                comment="Schedule Id"/>
+        <column xsi:type="int"
+                name="speaker_id"
+                unsigned="true"
+                nullable="false"
+                identity="false"
+                comment="Speaker ID"/>
+        <column xsi:type="int"
+                name="relation_id"
+                unsigned="true"
+                nullable="false"
+                identity="true"
+                comment="Relation ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="relation_id"/>
+            <column name="event_id"/>
+            <column name="schedule_id"/>
+            <column name="speaker_id"/>
+        </constraint>
+        <!--        Event ID to Event Data       -->
+        <constraint xsi:type="foreign"
+                    referenceId="SPB_SCHSPK_EVT_ID_SPB_EVT_EVT_ID"
+                    table="hanstudio_eventpagebuilder_schspk"
+                    column="event_id"
+                    referenceTable="hanstudio_eventpagebuilder_event"
+                    referenceColumn="event_id"
+                    onDelete="CASCADE"/>
+        <!--        Schedule ID to Schedule Data        -->
+        <constraint xsi:type="foreign"
+                    referenceId="SPB_SCHSPK_SCH_ID_SPB_SCH_SCH_ID"
+                    table="hanstudio_eventpagebuilder_schspk"
+                    column="schedule_id"
+                    referenceTable="hanstudio_eventpagebuilder_schedule"
+                    referenceColumn="schedule_id"
+                    onDelete="CASCADE"/>
+        <!--        Speaker ID to Speaker Data      -->
+        <constraint xsi:type="foreign"
+                    referenceId="SPB_SCHSPK_SPEAKER_ID_SPB_SPEAKER_SPEAKER_ID"
+                    table="hanstudio_eventpagebuilder_schspk"
+                    column="speaker_id"
+                    referenceTable="hanstudio_eventpagebuilder_speaker"
+                    referenceColumn="speaker_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="PROD_BLOG_REL_PROD_ID_BLOG_ID_KEY">
+            <column name="event_id"/>
+            <column name="schedule_id"/>
+            <column name="speaker_id"/>
+        </constraint>
+        <index referenceId="CATALOGRULE_CUSTOMER_GROUP_CUSTOMER_GROUP_ID" indexType="btree">
+            <column name="event_id"/>
+        </index>
+    </table>
+
+</schema>

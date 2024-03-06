@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!--    <route method="GET" url="/V1/event/:id">-->
+    <!--        <service class="HanStudio\EventPageBuilder\Api\EventRepositoryInterface" method="getById"/>-->
+    <!--        <resources>-->
+    <!--            <resource ref="anonymous"/>-->
+    <!--        </resources>-->
+    <!--    </route>-->
+
+    <route method="GET" url="/V1/data/:event_id">
+        <service class="HanStudio\EventPageBuilder\Api\DataRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/image/speaker/:id">
+        <service class="HanStudio\EventPageBuilder\Api\DataRepositoryInterface" method="image"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

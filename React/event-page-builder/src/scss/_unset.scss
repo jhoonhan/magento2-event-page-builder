@@ -1,0 +1,15 @@
+#hanstudio-event-page-builder {
+  * {
+    font-size: calc(var(--em) * 1.6);
+    font-family: var(--f-f--d);
+    font-weight: var(--f-w--d);
+    line-height: 1.5;
+    color: var(--c--black);
+    box-sizing: border-box;
+
+    padding: 0;
+    max-resolution: 0;
+
+    transition: var(--transition--d);
+  }
+}

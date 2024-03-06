@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                hanstudio_eventpagebuilder_schedule_form.hanstudio_eventpagebuilder_schedule_data_source
+            </item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="HanStudio\EventPageBuilder\Block\Adminhtml\Schedule\Edit\Button\Back"/>
+            <button name="save" class="HanStudio\EventPageBuilder\Block\Adminhtml\Schedule\Edit\Button\Save"/>
+        </buttons>
+        <namespace>hanstudio_eventpagebuilder_schedule_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>
+                hanstudio_eventpagebuilder_schedule_form.hanstudio_eventpagebuilder_schedule_data_source
+            </dep>
+        </deps>
+    </settings>
+    <dataSource name="hanstudio_eventpagebuilder_schedule_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="HanStudio\EventPageBuilder\Ui\DataProvider\Schedule"
+                      name="hanstudio_eventpagebuilder_schedule_data_source">
+            <settings>
+                <requestFieldName>schedule_id</requestFieldName>
+                <primaryFieldName>schedule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="hanstudio_eventpagebuilder_schedule_fieldset">
+        <settings>
+            <label translate="true">Basic Information</label>
+        </settings>
+        <field name="schedule_id" formElement="hidden"/>
+        <field name="name" formElement="input">
+            <settings>
+                <label translate="true">Name</label>
+                <placeholder>Kickoff Meeting</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="schedule_date" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Date</item>
+                    <item name="source" xsi:type="string">hanstudio_eventpagebuilder_schedule</item>
+                    <item name="options" xsi:type="array">
+                        <!--                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>-->
+                        <item name="showsTime" xsi:type="boolean">false</item>
+                        <item name="minDate" xsi:type="string">new Date()</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <placeholder>01/20/2024</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="starts_at" formElement="input">
+            <settings>
+                <label translate="true">Start Time</label>
+                <placeholder>00:00</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="ends_at" formElement="input">
+            <settings>
+                <label translate="true">End Time</label>
+                <placeholder>24:00</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="description" formElement="input">
+            <settings>
+                <label translate="true">Description</label>
+                <placeholder>Bio and shit</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </field>
+        <!--        <field name="is_split" formElement="select">-->
+        <!--            <argument name="data" xsi:type="array">-->
+        <!--                <item name="config" xsi:type="array">-->
+        <!--                    <item name="default" xsi:type="string">0</item>-->
+        <!--                </item>-->
+        <!--            </argument>-->
+        <!--            <settings>-->
+        <!--                <label translate="true">Split Session</label>-->
+        <!--                <validation>-->
+        <!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
+        <!--                </validation>-->
+        <!--            </settings>-->
+        <!--            <formElements>-->
+        <!--                <select>-->
+        <!--                    <settings>-->
+        <!--                        <options class="Magento\Config\Model\Config\Source\Yesno"/>-->
+        <!--                    </settings>-->
+        <!--                </select>-->
+        <!--            </formElements>-->
+        <!--        </field>-->
+        <field name="is_published" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">1</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Publish</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="speakers">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">
+                    HanStudio\EventPageBuilder\Ui\Component\Form\SpeakerOptionsProvider
+                </item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Speakers</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">HanStudio_EventPageBuilder/js/form/element/ui-select
+                    </item>
+                    <item name="elementTmpl" xsi:type="string">
+                        HanStudio_EventPageBuilder/grid/filters/elements/ui-select
+                    </item>
+                    <item name="dataScope" xsi:type="string">speakers</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="expanded" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <!--                    <item name="sortOrder" xsi:type="number">100</item>-->
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

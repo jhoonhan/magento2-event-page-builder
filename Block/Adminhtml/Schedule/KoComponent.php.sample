@@ -1,0 +1,44 @@
+<?php
+
+namespace HanStudio\EventPageBuilder\Block\Adminhtml\Schedule;
+
+use Magento\Backend\Block\Template;
+use Magento\Backend\Block\Template\Context;
+use Magento\Framework\App\RequestInterface;
+use HanStudio\EventPageBuilder\Model\ResourceModel\Schedule\CollectionFactory as ScheduleCollectionFactory;
+
+
+class KoComponent extends Template
+{
+    /** @var RequestInterface */
+    protected $request;
+
+    protected string $eventId;
+
+    /**
+     * @param Context $context
+     * @param RequestInterface $request
+     * @param ScheduleCollectionFactory $scheduleCollectionFactory
+     * @param array $data
+     */
+    public function __construct(
+        Context                   $context,
+        RequestInterface          $request,
+        ScheduleCollectionFactory $scheduleCollectionFactory,
+        array                     $data = []
+    )
+    {
+        parent::__construct($context, $data);
+        $this->request = $request;
+        $this->scheduleCollectionFactory = $scheduleCollectionFactory;
+        $this->eventId = $this->request->getParam('event_id');
+        $this->schduleId = $this->request->getParam('id');
+    }
+
+//    public function getSpeakers(): string
+//    {
+//        $scheduleCollection = $this->scheduleCollectionFactory->create();
+//        $scheduleCollection->addFieldToFilter('id', $this->schduleId);
+//        return $scheduleCollection->getFirstItem()->getData('speakers');
+//    }
+}

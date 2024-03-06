@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  react_app:
+    build: ./event-page-builder
+    container_name: event_page_builder_c
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./event-page-builder:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true

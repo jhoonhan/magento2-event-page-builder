@@ -1,0 +1,8 @@
+<!--<div class="edit-speakers">-->
+<!--    &lt;!&ndash;    <form data-bind="submit: handleSubmit">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <input id="sku" name="sku" type="text" data-bind="textInput: sku, attr: { placeholder: placeholder }"/>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <button class="action primary" type="submit">&lt;!&ndash; ko i18n: 'Confirm SKU' &ndash;&gt;&lt;!&ndash; /ko &ndash;&gt;</button>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <div class="message-response"&ndash;&gt;-->
+<!--    &lt;!&ndash;             data-bind="html: messageResponse, style: { color: isSuccess() ? 'green' : 'red' }"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </form>&ndash;&gt;-->
+<!--</div>-->

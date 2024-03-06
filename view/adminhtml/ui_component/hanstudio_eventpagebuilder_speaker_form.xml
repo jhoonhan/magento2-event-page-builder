@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                hanstudio_eventpagebuilder_speaker_form.hanstudio_eventpagebuilder_speaker_data_source
+            </item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="HanStudio\EventPageBuilder\Block\Adminhtml\Speaker\Edit\Button\Back"/>
+            <button name="save" class="HanStudio\EventPageBuilder\Block\Adminhtml\Speaker\Edit\Button\Save"/>
+        </buttons>
+        <namespace>hanstudio_eventpagebuilder_speaker_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>
+                hanstudio_eventpagebuilder_speaker_form.hanstudio_eventpagebuilder_speaker_data_source
+            </dep>
+        </deps>
+    </settings>
+    <dataSource name="hanstudio_eventpagebuilder_speaker_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="HanStudio\EventPageBuilder\Ui\DataProvider\Speaker"
+                      name="hanstudio_eventpagebuilder_speaker_data_source">
+            <settings>
+                <requestFieldName>speaker_id</requestFieldName>
+                <primaryFieldName>speaker_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="hanstudio_eventpagebuilder_speaker_fieldset">
+        <settings>
+            <label/>
+        </settings>
+        <field name="speaker_id" formElement="hidden"/>
+        <field name="firstname" formElement="input">
+            <settings>
+                <label translate="true">Firstname</label>
+                <placeholder>John</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="lastname" formElement="input">
+            <settings>
+                <label translate="true">Lastname</label>
+                <placeholder>Doe</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="title" formElement="input">
+            <settings>
+                <label translate="true">Title</label>
+                <placeholder>Director of Sales</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="company" formElement="input">
+            <settings>
+                <label translate="true">Company</label>
+                <placeholder>HanStudio Holdings</placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="description" formElement="textarea">
+            <settings>
+                <label translate="true">Description</label>
+                <placeholder>
+                    Personal bio, etc.
+                </placeholder>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <textarea>
+                    <settings>
+                        <rows>12</rows>
+                    </settings>
+                </textarea>
+            </formElements>
+        </field>
+
+        <!--        ADD_004 Image Uploader      -->
+        <!--        <field name="image">-->
+        <!--            <argument name="data" xsi:type="array">-->
+        <!--                <item name="config" xsi:type="array">-->
+        <!--                    <item name="dataType" xsi:type="string">string</item>-->
+        <!--                    <item name="source" xsi:type="string">Label</item>-->
+        <!--                    <item name="label" xsi:type="string" translate="true">Image</item>-->
+        <!--                    <item name="visible" xsi:type="boolean">true</item>-->
+        <!--                    <item name="formElement" xsi:type="string">fileUploader</item>-->
+        <!--                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>-->
+        <!--                    <item name="previewTmpl" xsi:type="string">HanStudio_EventPageBuilder/image-preview</item>-->
+        <!--                    <item name="required" xsi:type="boolean">false</item>-->
+        <!--                    <item name="uploaderConfig" xsi:type="array">-->
+        <!--                        <item name="url" xsi:type="url" path="eventpagebuilder/index/upload"/>-->
+        <!--                    </item>-->
+        <!--                </item>-->
+        <!--            </argument>-->
+        <!--        </field>-->
+
+        <field name="image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">json</item>
+                    <item name="label" xsi:type="string" translate="true">Image</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg png</item>
+                    <item name="maxFileSize" xsi:type="number">2097152</item>
+                    <item name="formElement" xsi:type="string">imageUploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="dataScope" xsi:type="string">image</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="eventpagebuilder/index/upload">
+                            <param name="target_element_id">image</param>
+                            <param name="type">image</param>
+                        </item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+</form>

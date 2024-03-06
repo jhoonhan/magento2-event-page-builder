@@ -1,0 +1,78 @@
+{
+    "hanstudio_eventpagebuilder_event": {
+        "column": {
+            "event_id": true,
+            "name": true,
+            "url": true,
+            "event_start_date": true,
+            "timezone": true,
+            "description": true,
+            "is_published": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "HANSTUDIO_EVENTPAGEBUILDER_EVENT_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "HANSTUDIO_EVENTPAGEBUILDER_EVENT_URL": true
+        }
+    },
+    "hanstudio_eventpagebuilder_schedule": {
+        "column": {
+            "schedule_id": true,
+            "event_id": true,
+            "name": true,
+            "schedule_date": true,
+            "starts_at": true,
+            "ends_at": true,
+            "description": true,
+            "is_published": true
+        },
+        "index": {
+            "HANSTUDIO_EVENTPAGEBUILDER_SCHEDULE_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_F1478A1B5606E138F43A9318A5760C29": true
+        }
+    },
+    "hanstudio_eventpagebuilder_speaker": {
+        "column": {
+            "speaker_id": true,
+            "event_id": true,
+            "firstname": true,
+            "lastname": true,
+            "title": true,
+            "company": true,
+            "description": true,
+            "image": true
+        },
+        "index": {
+            "HANSTUDIO_EVENTPAGEBUILDER_SPEAKER_LASTNAME": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_1BB8666BFE6ABA4743F9791156F8E331": true
+        }
+    },
+    "hanstudio_eventpagebuilder_schspk": {
+        "column": {
+            "event_id": true,
+            "schedule_id": true,
+            "speaker_id": true,
+            "relation_id": true
+        },
+        "index": {
+            "HANSTUDIO_EVENTPAGEBUILDER_SCHSPK_EVENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_72A857E83B8BD8FD7EE992310EB131B6": true,
+            "FK_D108337C240B823BC8262A79281F4E46": true,
+            "FK_918F6593D519095A055B1FD2E493B7A0": true,
+            "UNQ_1D563D4AF2CA7861A571663359487344": true
+        }
+    }
+}

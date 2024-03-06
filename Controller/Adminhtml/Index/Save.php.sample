@@ -1,0 +1,132 @@
+/** https://devhooks.in/blog/magento-2-add-image-uploader-on-admin-ui-form */
+
+<?php
+//
+//
+//namespace HanStudio\EventPageBuilder\Controller\Adminhtml\Index;
+//
+//use HanStudio\EventPageBuilder\Model\ImageFactory;
+//use Magento\Backend\App\Action\Context;
+//use Magento\Framework\View\Result\PageFactory;
+//use HanStudio\EventPageBuilder\Model\ImageUploader;
+//use Magento\Framework\Message\ManagerInterface;
+//use Magento\Framework\App\Cache\Manager;
+//use Magento\Backend\App\Action;
+//
+///**
+// * Class Save
+// * @package HanStudio\EventPageBuilder\Controller\Adminhtml\Index
+// */
+//class Save extends Action
+//{
+//
+//    /**
+//     * @var PageFactory
+//     */
+//    protected $resultPageFactory;
+//
+//    /**
+//     * @var ImageFactory
+//     */
+//    protected $imageFactory;
+//
+//    /**
+//     * @var ManagerInterface
+//     */
+//    protected $_messageManager;
+//    /**
+//     * @var TypeListInterface
+//     */
+//    protected $cacheManager;
+//
+//    /**
+//     * Save constructor.
+//     * @param Context $context
+//     * @param PageFactory $resultPageFactory
+//     * @param ImageFactory $imageFactory
+//     * @param ManagerInterface $messageManager
+//     * @param UrlRewriteFactory $urlRewriteFactory
+//     * @param StoreRepositoryInterface $storeRepository
+//     * @param CollectionFactory $collectionFactory
+//     */
+//    public function __construct(
+//        Context          $context,
+//        PageFactory      $resultPageFactory,
+//        ImageFactory     $imageFactory,
+//        ImageUploader    $imageUploaderModel,
+//        ManagerInterface $messageManager,
+//        Manager          $cacheManager
+//    )
+//    {
+//        parent::__construct($context);
+//        $this->resultPageFactory = $resultPageFactory;
+//        $this->imageFactory = $imageFactory;
+//        $this->imageUploaderModel = $imageUploaderModel;
+//        $this->messageManager = $messageManager;
+//        $this->cacheManager = $cacheManager;
+//    }
+//
+//    /**
+//     * @return mixed
+//     */
+//    public function execute()
+//    {
+//        try {
+//            $resultPageFactory = $this->resultRedirectFactory->create();
+//            $data = $this->getRequest()->getPostValue();
+//            $model = $this->imageFactory->create();
+//            $model->setData($data);
+//            $model = $this->imageData($model, $data);
+//            $model->save();
+//            $this->messageManager->addSuccessMessage(__("Data Saved Successfully."));
+//            $buttonData = $this->getRequest()->getParam('back');
+//            if ($buttonData == 'edit' && $model->getId()) {
+//                return $resultPageFactory->setPath('eventpagebuilder/index/form', ['id' => $model->getId()]);
+//            }
+//            if ($buttonData == 'new') {
+//                return $resultPageFactory->setPath('eventpagebuilder/index/form');
+//            }
+//            if ($buttonData == 'close') {
+//                $this->_redirect('eventpagebuilder/index/index');
+//            }
+//        } catch (\Exception $e) {
+//            $this->_messageManager->addErrorMessage(__($e));
+//        }
+//        return $resultPageFactory->setPath('eventpagebuilder/index/index');
+//    }
+//
+//    /**
+//     * @param $model
+//     * @param $data
+//     * @return mixed
+//     */
+//    public function imageData($model, $data)
+//    {
+//        echo('ERROR-003');
+//        if ($model->getId()) {
+//            $pageData = $this->imageFactory->create();
+//            $pageData->load($model->getId());
+//            if (isset($data['image_field'][0]['name'])) {
+//                $imageName1 = $pageData->getThumbnail();
+//                $imageName2 = $data['image_field'][0]['name'];
+//                if ($imageName1 != $imageName2) {
+//                    $imageUrl = $data['image_field'][0]['url'];
+//                    $imageName = $data['image_field'][0]['name'];
+//                    $data['image_field'] = $this->imageUploaderModel->saveMediaImage($imageName, $imageUrl);
+//                } else {
+//                    $data['image_field'] = $data['image_field'][0]['name'];
+//                }
+//            } else {
+//                $data['image_field'] = '';
+//            }
+//        } else {
+//            if (isset($data['image_field'][0]['name'])) {
+//                $imageUrl = $data['image_field'][0]['url'];
+//                $imageName = $data['image_field'][0]['name'];
+//                $data['image_field'] = $this->imageUploaderModel->saveMediaImage($imageName, $imageUrl);
+//            }
+//        }
+//        $model->setData($data);
+//        return $model;
+//    }
+//}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::content">
+                    <resource id="HanStudio_EventPageBuilder::eventpagebuilder" title="EventPageBuilder"
+                              translate="title" sortOrder="900">
+                        <resource id="HanStudio_EventPageBuilder::event" title="Events" translate="title">
+                            <resource id="HanStudio_EventPageBuilder::event_save" title="Save" translate="title"/>
+                            <resource id="HanStudio_EventPageBuilder::event_delete" title="Delete"
+                                      translate="title"/>
+                        </resource>
+                        <resource id="HanStudio_EventPageBuilder::schedule" title="Schedules" translate="title">
+                            <resource id="HanStudio_EventPageBuilder::schedule_save" title="Save" translate="title"/>
+                            <resource id="HanStudio_EventPageBuilder::schedule_delete" title="Delete"
+                                      translate="title"/>
+                        </resource>
+                        <resource id="HanStudio_EventPageBuilder::speaker" title="Speakers" translate="title">
+                            <resource id="HanStudio_EventPageBuilder::speaker_save" title="Save" translate="title"/>
+                            <resource id="HanStudio_EventPageBuilder::speaker_delete" title="Delete"
+                                      translate="title"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

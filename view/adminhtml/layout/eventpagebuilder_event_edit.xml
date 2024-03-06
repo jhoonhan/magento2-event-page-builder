@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="hanstudio_eventpagebuilder_event_form"/>
+            
+            <block name="schedule_listing_lable" class="Magento\Framework\View\Element\Template"
+                   template="HanStudio_EventPageBuilder::ListingLabels/schedule_listing_lable.phtml"/>
+            <uiComponent name="hanstudio_eventpagebuilder_schedule_listing"/>
+
+            <block name="speaker_listing_lable" class="Magento\Framework\View\Element\Template"
+                   template="HanStudio_EventPageBuilder::ListingLabels/speaker_listing_lable.phtml"/>
+            <uiComponent name="hanstudio_eventpagebuilder_speaker_listing"/>
+
+        </referenceContainer>
+    </body>
+</page>

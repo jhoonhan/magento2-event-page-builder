@@ -1,0 +1,43 @@
+<?php
+
+namespace HanStudio\EventPageBuilder\Block\Adminhtml\Event;
+
+use Magento\Backend\Block\Template;
+use Magento\Backend\Block\Template\Context;
+use Magento\Framework\App\RequestInterface;
+use HanStudio\EventPageBuilder\Model\ResourceModel\Event\CollectionFactory as EventCollectionFactory;
+
+
+class EditSpeakers extends Template
+{
+    /** @var RequestInterface */
+    protected $request;
+
+    protected string $eventId;
+
+    /**
+     * @param Context $context
+     * @param RequestInterface $request
+     * @param EventCollectionFactory $eventCollectionFactory
+     * @param array $data
+     */
+    public function __construct(
+        Context                $context,
+        RequestInterface       $request,
+        EventCollectionFactory $eventCollectionFactory,
+        array                  $data = []
+    )
+    {
+        parent::__construct($context, $data);
+        $this->request = $request;
+        $this->eventCollectionFactory = $eventCollectionFactory;
+        $this->eventId = $this->request->getParam('id');
+    }
+
+    public function getSpeakers(): string
+    {
+        $scheduleCollection = $this->eventCollectionFactory->create();
+        $scheduleCollection->addFieldToFilter('id', $this->eventId);
+        return $scheduleCollection->getFirstItem()->getData('speakers');
+    }
+}

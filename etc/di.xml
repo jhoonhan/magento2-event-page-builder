@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--    <preference for="HanStudio\EventPageBuilder\Api\Data\EventInterface"-->
+    <!--                type="HanStudio\EventPageBuilder\Model\Event"/>-->
+    <!--    <preference for="HanStudio\EventPageBuilder\Api\EventRepositoryInterface"-->
+    <!--                type="HanStudio\EventPageBuilder\Model\EventRepository"/>-->
+    <preference for="HanStudio\EventPageBuilder\Api\Data\DataInterface"
+                type="HanStudio\EventPageBuilder\Model\Data"/>
+    <preference for="HanStudio\EventPageBuilder\Api\DataRepositoryInterface"
+                type="HanStudio\EventPageBuilder\Model\DataRepository"/>
+    <virtualType name="HanStudio\EventPageBuilder\Model\ResourceModel\Event\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">hanstudio_eventpagebuilder_event</argument>
+            <argument name="resourceModel" xsi:type="string">HanStudio\EventPageBuilder\Model\ResourceModel\Event
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="hanstudio_eventpagebuilder_event_listing_data_source" xsi:type="string">
+                    HanStudio\EventPageBuilder\Model\ResourceModel\Event\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="HanStudio\EventPageBuilder\Model\ResourceModel\Schedule\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">hanstudio_eventpagebuilder_schedule</argument>
+            <argument name="resourceModel" xsi:type="string">HanStudio\EventPageBuilder\Model\ResourceModel\Schedule
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="hanstudio_eventpagebuilder_schedule_listing_data_source" xsi:type="string">
+                    HanStudio\EventPageBuilder\Model\ResourceModel\Schedule\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="HanStudio\EventPageBuilder\Model\ResourceModel\Speaker\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">hanstudio_eventpagebuilder_speaker</argument>
+            <argument name="resourceModel" xsi:type="string">HanStudio\EventPageBuilder\Model\ResourceModel\Speaker
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="hanstudio_eventpagebuilder_speaker_listing_data_source" xsi:type="string">
+                    HanStudio\EventPageBuilder\Model\ResourceModel\Speaker\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+
+    <virtualType name="HanStudio\EventPageBuilder\Model\ResourceModel\Schspk\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">hanstudio_eventpagebuilder_schspk</argument>
+            <argument name="resourceModel" xsi:type="string">HanStudio\EventPageBuilder\Model\ResourceModel\Schspk
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+</config>

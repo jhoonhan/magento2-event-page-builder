@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+                id="HanStudio_EventPageBuilder::eventpagebuilder"
+                title="Event Page Builder"
+                translate="title"
+                module="HanStudio_EventPageBuilder"
+                resource="HanStudio_EventPageBuilder::eventpagebuilder"
+                parent="Magento_Backend::content"
+                sortOrder="900"
+        />
+        <add
+                id="HanStudio_EventPageBuilder::event"
+                title="Events"
+                translate="title"
+                module="HanStudio_EventPageBuilder"
+                resource="HanStudio_EventPageBuilder::event"
+                parent="HanStudio_EventPageBuilder::eventpagebuilder"
+                action="eventpagebuilder/event"
+        />
+    </menu>
+</config>
