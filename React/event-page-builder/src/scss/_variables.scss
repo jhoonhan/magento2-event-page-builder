@@ -1,5 +1,5 @@
 :root {
-  --em: 1rem;
+  --em: 1.6rem;
   --em--fl: clamp(0.625rem, min(0.521vw, 0.251vh), 1rem);
 
   --d--xs--fl: calc(var(--em--fl) * 0.5); // 5 - 8px

@@ -41,7 +41,7 @@ Working...
 3. The module creates a CRUD API access points for the frontend to access the event.
 
 ```
-Example http request to the API:
+Example http request to the API:tl
 
 https://testsite.dev/rest/V1/data/1
 // This will return the event information with the id of 1 with associated schedules and speakers.
@@ -53,3 +53,29 @@ https://testsite.dev/rest/V1/data/1
 5. Currently, in version 1, it only creates a CMS Block for an event programme. In the future version, it will create a
    CMS Page for other information such as event speakers, event location, and event sponsors.
 
+## Frontend
+
+The frontend is build with React 8 on TypeScript. The code is located in HanStudio/EventPageBuilder/React/.
+To spin up a local instance, you must run "npm start" command from the React folder root (ex:
+HanStudio/EventPageBuilder/React/event-page-builder/).
+<br>
+
+### Start Local Instance
+
+```
+npm start
+// Spin up a local instance
+```
+
+### Build
+
+```
+npm run build
+// This runs react build script and additional gulp commands to make the code usuable within Magento 2.
+```
+
+Built html file gets saved in ./view/adminhtml/templates/BlockTemplates/ as a phtml file so that it can get event_id
+from the Magento block.<br>
+Each time a change is made, you must build and update the Magento module so that the update is applied to the Magento.
+
+<br><br>
